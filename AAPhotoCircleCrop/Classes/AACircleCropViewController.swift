@@ -8,8 +8,7 @@
 
 import UIKit
 
-@objc public protocol AACircleCropViewControllerDelegate {
-    
+@objc public protocol AACircleCropViewControllerDelegate: class {
     func circleCropDidCropImage(_ image: UIImage)
     @objc optional func circleCropDidCancel()
 }
@@ -17,12 +16,13 @@ import UIKit
 open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Open properties
+    
     /// Set the delegate to get the cropped image
-    open var delegate: AACircleCropViewControllerDelegate?
+    open weak var delegate: AACircleCropViewControllerDelegate?
     /// Image to crop
     open var image: UIImage!
-    /// Set the size to get the cropped image resized. The
-    /// default size is the circleDiameter
+    /// Set the size to get the cropped image resized.
+    /// The default size is the circleDiameter
     open var imageSize: CGSize?
     /// Titles of the buttons. You can use them for localization
     open var selectTitle: String = "Select"
@@ -33,6 +33,7 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // MARK: - Private properties
+    
     fileprivate var selectButton: UIButton!
     fileprivate var cancelButton: UIButton!
     fileprivate var imageView: UIImageView!
@@ -44,9 +45,8 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         return UIScreen.main.bounds.width - circleOffset * 2
     }
     
-    //- - -
     // MARK: - View Management
-    //- - -
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
         
@@ -148,7 +148,7 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     //- - -
     
-    func selectAction() {
+    @objc func selectAction() {
         
         let newSize = CGSize(width: image.size.width * scrollView.zoomScale, height: image.size.height * scrollView.zoomScale)
         
@@ -176,7 +176,7 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         self.dismiss(animated: true, completion: nil) 
     }
     
-    func cancelAction() {
+    @objc func cancelAction() {
         delegate?.circleCropDidCancel?()
         self.dismiss(animated: true, completion: nil)
     }

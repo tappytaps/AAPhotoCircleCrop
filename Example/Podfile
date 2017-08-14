@@ -1,11 +1,8 @@
+platform :ios, '8.0'
+
 use_frameworks!
 
 target 'AAPhotoCircleCrop_Example' do
   pod 'AAPhotoCircleCrop', :path => '../'
 
-  target 'AAPhotoCircleCrop_Tests' do
-    inherit! :search_paths
-
-    
-  end
 end
