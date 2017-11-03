@@ -12,8 +12,8 @@ AAPhotoCircleCrop is a simple circular photo cropper writter in Swift, based on 
 
 ## Requirements
 * iOS 8.0+
-* Xcode 8.1+
-* Swift 3
+* Xcode 9+
+* Swift 4
 
 ## Installation
 
