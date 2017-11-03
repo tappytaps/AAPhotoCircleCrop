@@ -64,18 +64,18 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(imageView)
         scrollView.contentSize = image.size
         
-        let scaleWidth = scrollView.frame.size.width / scrollView.contentSize.width
-        scrollView.minimumZoomScale = scaleWidth
-        if imageView.frame.size.width < scrollView.frame.size.width {
-            print("We have the case where the frame is too small")
-            scrollView.maximumZoomScale = scaleWidth * 2
+        var scaleWidth: CGFloat = 0
+        if imageView.frame.width > imageView.frame.height {
+            scaleWidth = scrollView.frame.size.height / scrollView.contentSize.height
         } else {
-            scrollView.maximumZoomScale = 1.0
+            scaleWidth = scrollView.frame.size.width / scrollView.contentSize.width
         }
+        
+        scrollView.minimumZoomScale = scaleWidth
         scrollView.zoomScale = scaleWidth
         
         // Center vertically
-        scrollView.contentOffset = CGPoint(x: 0, y: (scrollView.contentSize.height - scrollView.frame.size.height)/2)
+        scrollView.contentOffset = CGPoint(x: (scrollView.contentSize.width - scrollView.frame.size.width)/2, y: (scrollView.contentSize.height - scrollView.frame.size.height)/2)
         
         scrollView.center = view.center
         view.addSubview(scrollView)

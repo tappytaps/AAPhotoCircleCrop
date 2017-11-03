@@ -27,7 +27,7 @@ class ViewController: UIViewController, AACircleCropViewControllerDelegate {
     //- - -
     @IBAction func cropAction(_ sender: UIButton) {
         let circleCropController = AACircleCropViewController()
-        circleCropController.image = UIImage(named: "my_photo.jpg")!
+        circleCropController.image = #imageLiteral(resourceName: "my_photo.jpg")
         circleCropController.delegate = self
         
         // Set the imageSize you want to get

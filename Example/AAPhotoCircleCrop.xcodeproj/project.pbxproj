@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1732BCB21E2A934D0099EDCE /* my_photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1732BCB11E2A934D0099EDCE /* my_photo.jpg */; };
+		17A1192A1FAC6342000DF83B /* landscape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17A119291FAC6317000DF83B /* landscape.jpg */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 		109BFA79B1DD52A7078A9AA0 /* Pods-AAPhotoCircleCrop_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AAPhotoCircleCrop_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AAPhotoCircleCrop_Tests/Pods-AAPhotoCircleCrop_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		14376C0D9626E40B1555D66E /* AAPhotoCircleCrop.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AAPhotoCircleCrop.podspec; path = ../AAPhotoCircleCrop.podspec; sourceTree = "<group>"; };
 		1732BCB11E2A934D0099EDCE /* my_photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = my_photo.jpg; sourceTree = "<group>"; };
+		17A119291FAC6317000DF83B /* landscape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = landscape.jpg; sourceTree = "<group>"; };
 		18E249DDF9ACD569984AA9D8 /* Pods-AAPhotoCircleCrop_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AAPhotoCircleCrop_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AAPhotoCircleCrop_Example/Pods-AAPhotoCircleCrop_Example.release.xcconfig"; sourceTree = "<group>"; };
 		203F988381DE0E41736C4A97 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		425862C1B50267B07658F316 /* Pods_AAPhotoCircleCrop_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AAPhotoCircleCrop_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			children = (
 				607FACD41AFB9204008FA782 /* Info.plist */,
 				1732BCB11E2A934D0099EDCE /* my_photo.jpg */,
+				17A119291FAC6317000DF83B /* landscape.jpg */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A1192A1FAC6342000DF83B /* landscape.jpg in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				1732BCB21E2A934D0099EDCE /* my_photo.jpg in Resources */,
