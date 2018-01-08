@@ -8,8 +8,7 @@
 
 import UIKit
 
-@objc public protocol AACircleCropViewControllerDelegate {
-    
+@objc public protocol AACircleCropViewControllerDelegate: class {
     func circleCropDidCropImage(_ image: UIImage)
     @objc optional func circleCropDidCancel()
 }
@@ -17,12 +16,13 @@ import UIKit
 open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Open properties
+    
     /// Set the delegate to get the cropped image
-    open var delegate: AACircleCropViewControllerDelegate?
+    open weak var delegate: AACircleCropViewControllerDelegate?
     /// Image to crop
     open var image: UIImage!
-    /// Set the size to get the cropped image resized. The
-    /// default size is the circleDiameter
+    /// Set the size to get the cropped image resized.
+    /// The default size is the circleDiameter
     open var imageSize: CGSize?
     /// Titles of the buttons. You can use them for localization
     open var selectTitle: String = "Select"
@@ -33,6 +33,7 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // MARK: - Private properties
+    
     fileprivate var selectButton: UIButton!
     fileprivate var cancelButton: UIButton!
     fileprivate var imageView: UIImageView!
@@ -44,9 +45,8 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         return UIScreen.main.bounds.width - circleOffset * 2
     }
     
-    //- - -
     // MARK: - View Management
-    //- - -
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,18 +64,18 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(imageView)
         scrollView.contentSize = image.size
         
-        let scaleWidth = scrollView.frame.size.width / scrollView.contentSize.width
-        scrollView.minimumZoomScale = scaleWidth
-        if imageView.frame.size.width < scrollView.frame.size.width {
-            print("We have the case where the frame is too small")
-            scrollView.maximumZoomScale = scaleWidth * 2
+        var scaleWidth: CGFloat = 0
+        if imageView.frame.width > imageView.frame.height {
+            scaleWidth = scrollView.frame.size.height / scrollView.contentSize.height
         } else {
-            scrollView.maximumZoomScale = 1.0
+            scaleWidth = scrollView.frame.size.width / scrollView.contentSize.width
         }
+        
+        scrollView.minimumZoomScale = scaleWidth
         scrollView.zoomScale = scaleWidth
         
         // Center vertically
-        scrollView.contentOffset = CGPoint(x: 0, y: (scrollView.contentSize.height - scrollView.frame.size.height)/2)
+        scrollView.contentOffset = CGPoint(x: (scrollView.contentSize.width - scrollView.frame.size.width)/2, y: (scrollView.contentSize.height - scrollView.frame.size.height)/2)
         
         scrollView.center = view.center
         view.addSubview(scrollView)
