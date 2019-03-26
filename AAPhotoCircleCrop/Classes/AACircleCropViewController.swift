@@ -31,6 +31,9 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    open override var shouldAutorotate: Bool {
+        return false
+    }
     
     // MARK: - Private properties
     
@@ -42,7 +45,13 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
     private var circleDiameter: CGFloat {
         // Offeset for leading and trailing
         let circleOffset: CGFloat = 40
-        return UIScreen.main.bounds.width - circleOffset * 2
+        let viewSize = view.frame.size
+        
+        if viewSize.width > viewSize.height {
+            return viewSize.height - circleOffset * 2
+        } else {
+            return viewSize.width - circleOffset * 2
+        }
     }
     
     // MARK: - View Management
@@ -51,14 +60,15 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.black
-        
+        view.layer.masksToBounds = true
+
         // Setup imageView
         imageView = UIImageView()
         imageView.image = image
         imageView.frame = CGRect(origin: CGPoint.zero, size: image.size)
         
         // Setup scrollView
-        scrollView = AACircleCropScrollView(frame: CGRect(x: 0, y: 0, width: circleDiameter, height: circleDiameter))
+        scrollView = AACircleCropScrollView()
         scrollView.backgroundColor = UIColor.black
         scrollView.delegate = self
         scrollView.addSubview(imageView)
@@ -66,19 +76,25 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         
         var scaleWidth: CGFloat = 0
         if imageView.frame.width > imageView.frame.height {
-            scaleWidth = scrollView.frame.size.height / scrollView.contentSize.height
+            scaleWidth = circleDiameter / scrollView.contentSize.height
         } else {
-            scaleWidth = scrollView.frame.size.width / scrollView.contentSize.width
+            scaleWidth = circleDiameter / scrollView.contentSize.width
         }
         
         scrollView.minimumZoomScale = scaleWidth
         scrollView.zoomScale = scaleWidth
         
         // Center vertically
-        scrollView.contentOffset = CGPoint(x: (scrollView.contentSize.width - scrollView.frame.size.width)/2, y: (scrollView.contentSize.height - scrollView.frame.size.height)/2)
+        scrollView.contentOffset = CGPoint(x: (scrollView.contentSize.width - circleDiameter) / 2, y: (scrollView.contentSize.height - circleDiameter) / 2)
         
         scrollView.center = view.center
         view.addSubview(scrollView)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: circleDiameter))
+        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: circleDiameter))
         
         setupCutterView()
         setupButtons()
@@ -90,6 +106,11 @@ open class AACircleCropViewController: UIViewController, UIScrollViewDelegate {
         } else {
             _ = navigationController?.popViewController(animated: animated)
         }
+    }
+    
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cutterView.circleDiameter = circleDiameter
     }
 
     //- - -
